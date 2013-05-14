@@ -1,30 +1,39 @@
-#include "YouBotArmTest.hpp"
+#include "YouBotArmTestWithoutThread.hpp"
 #include <stdlib.h>
 #include <stdexcept>
 
 using namespace youbot;
 
-YouBotArmTest::YouBotArmTest():dof(5) {
+YouBotArmTestWithoutThread::YouBotArmTestWithoutThread():dof(5) {
+
+
+
+}
+
+YouBotArmTestWithoutThread::~YouBotArmTestWithoutThread() {
+
+}
+
+void YouBotArmTestWithoutThread::setUp() {
   char* location = getenv("YOUBOT_CONFIG_FOLDER_LOCATION");
-  if(location == NULL) throw std::runtime_error("YouBotArmTest.cpp: Could not find environment variable YOUBOT_CONFIG_FOLDER_LOCATION");
+  if(location == NULL) throw std::runtime_error("Could not find environment variable YOUBOT_CONFIG_FOLDER_LOCATION");
 
-  EthercatMaster::getInstance("youbot-ethercat.cfg", location, true);
-}
-
-YouBotArmTest::~YouBotArmTest() {
-}
-
-void YouBotArmTest::setUp() {
   Logger::logginLevel = trace;
   updateCycle = 2000;
+  ethercatMaster = &EthercatMaster::getInstance("youbot-ethercat.cfg", location, false);
+	if(ethercatMaster->isThreadActive()){
+		LOG(error) << "Thread Active";
+		EthercatMaster::destroy();
+		ethercatMaster = &EthercatMaster::getInstance("youbot-ethercat.cfg", location, false);
+	}
 
 }
 
-void YouBotArmTest::tearDown() {
-  //	EthercatMaster::destroy();
+void YouBotArmTestWithoutThread::tearDown() {
+  	EthercatMaster::destroy();
 }
 
-void YouBotArmTest::youBotArmTest() {
+void YouBotArmTestWithoutThread::youBotArmTest() {
 
   LOG(info) << __func__ << "\n";
   YouBotManipulator myArm("youbot-manipulator");
@@ -70,11 +79,29 @@ void YouBotArmTest::youBotArmTest() {
   for (int i = 0; i < dof; i++) {
     myTrace[i].startTrace();
   }
+  
+  ClearMotorControllerTimeoutFlag clearTimeoutFlag;
+  myArm.getArmJoint(1).setConfigurationParameter(clearTimeoutFlag);
+  myArm.getArmJoint(2).setConfigurationParameter(clearTimeoutFlag);
+  myArm.getArmJoint(3).setConfigurationParameter(clearTimeoutFlag);
+  myArm.getArmJoint(4).setConfigurationParameter(clearTimeoutFlag);
+  myArm.getArmJoint(5).setConfigurationParameter(clearTimeoutFlag);
+
+
+  if (!ethercatMaster->isThreadActive()) {
+      ethercatMaster->sendProcessData();
+      ethercatMaster->receiveProcessData();
+   }
+  
 
   // 1 sec no movement
   startTime = myTrace[0].getTimeDurationMilliSec();
   overallTime = startTime + 1000;  
   while (myTrace[0].getTimeDurationMilliSec() < overallTime) {
+    if (!ethercatMaster->isThreadActive()) {
+      ethercatMaster->sendProcessData();
+      ethercatMaster->receiveProcessData();
+    }
     for (int i = 0; i < dof; i++) {
       myTrace[i].updateTrace();
     }
@@ -86,6 +113,10 @@ void YouBotArmTest::youBotArmTest() {
   overallTime = startTime + 5000;
   myArm.setJointData(upstretchedpose);
   while (myTrace[0].getTimeDurationMilliSec() < overallTime) {
+    if (!ethercatMaster->isThreadActive()) {
+      ethercatMaster->sendProcessData();
+      ethercatMaster->receiveProcessData();
+    }
     for (int i = 0; i < dof; i++) {
       myTrace[i].updateTrace();
     }
@@ -97,6 +128,10 @@ void YouBotArmTest::youBotArmTest() {
   overallTime = startTime + 5000;
   myArm.setJointData(foldedpose);
   while (myTrace[0].getTimeDurationMilliSec() < overallTime) {
+    if (!ethercatMaster->isThreadActive()) {
+      ethercatMaster->sendProcessData();
+      ethercatMaster->receiveProcessData();
+    }
     for (int i = 0; i < dof; i++) {
       myTrace[i].updateTrace();
     }
@@ -107,6 +142,10 @@ void YouBotArmTest::youBotArmTest() {
   startTime = myTrace[0].getTimeDurationMilliSec();
   overallTime = startTime + 1000;  
   while (myTrace[0].getTimeDurationMilliSec() < overallTime) {
+    if (!ethercatMaster->isThreadActive()) {
+      ethercatMaster->sendProcessData();
+      ethercatMaster->receiveProcessData();
+    }
     for (int i = 0; i < dof; i++) {
       myTrace[i].updateTrace();
     }

@@ -6,7 +6,7 @@ using namespace youbot;
 
 YouBotBaseTest::YouBotBaseTest() {
   char* location;
-  location = getenv("YOUBOT_CONFIG_FOLDER_LOCATION");
+  location = getenv("PATH");
   if(location == NULL) throw std::runtime_error("YouBotBaseTest.cpp: Could not find environment variable YOUBOT_CONFIG_FOLDER_LOCATION");
   EthercatMaster::getInstance("youbot-ethercat.cfg", location, true);
 

@@ -69,9 +69,6 @@ Now you should be able to compile the youBot API.
 
 The library will be generated in the folder ~/youbot_driver/lib.
 
-Include a line like this in your /.bashrc :
-
-export YOUBOT_CONFIG_FOLDER_LOCATION=~/<catkin workspace>/src/youbot_driver/config
 
 Usage
 ------------
