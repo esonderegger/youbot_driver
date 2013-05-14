@@ -51,6 +51,7 @@
 
 #ifndef YOUBOT_UNITS_HPP
 #define	YOUBOT_UNITS_HPP
+#include <boost/units/io.hpp>
 #include <boost/units/pow.hpp>
 #include <boost/units/systems/si.hpp>
 #include <boost/units/systems/temperature/celsius.hpp>
