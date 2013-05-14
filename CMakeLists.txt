@@ -106,7 +106,7 @@ install(TARGETS YouBotDriver
 #copy header files
 install(DIRECTORY base-kinematic youbot generic generic-gripper generic-joint one-dof-gripper
   DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
-  FILES_MATCHING PATTERN "*.hpp"
+  FILES_MATCHING PATTERN "*.hpp" PATTERN "*.h"
 )
 
 #copy config files
