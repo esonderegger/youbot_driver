@@ -57,13 +57,13 @@ INCLUDE_DIRECTORIES(
 )
 
 ########### CppUnit and tests ###########
-FIND_PACKAGE(CppUnit)
-IF(CppUnit_FOUND)
-	MESSAGE(STATUS "SUCCESSFUL: CPP_UNIT found")
-  add_subdirectory(testing)
+#FIND_PACKAGE(CppUnit)
+#IF(CppUnit_FOUND)
+#	MESSAGE(STATUS "SUCCESSFUL: CPP_UNIT found")
+#  add_subdirectory(testing)
 #ELSE(CppUnit_FOUND)
 #	MESSAGE(STATUS "WARNING: CPP_UNIT not found")
-ENDIF (CppUnit_FOUND)
+#ENDIF (CppUnit_FOUND)
 
 ########### youBot display example application ###########
 #add_subdirectory(display)
