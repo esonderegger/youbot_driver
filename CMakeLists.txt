@@ -16,6 +16,7 @@ IF(DEFINED ROS_ROOT_PATH AND USE_ROS MATCHES ON)
 		CFG_EXTRAS config.cmake
 	)
 	ADD_DEFINITIONS(-DUSE_ROS_LOGGING)
+        SET(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake-modules")
 ELSEIF(DEFINED ROS_ROOT_PATH AND USE_ROS MATCHES ON)
 	SET(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake-modules")
 	SET(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib) #static libraries
@@ -60,7 +61,7 @@ INCLUDE_DIRECTORIES(
 #FIND_PACKAGE(CppUnit)
 #IF(CppUnit_FOUND)
 #	MESSAGE(STATUS "SUCCESSFUL: CPP_UNIT found")
-#  add_subdirectory(testing)
+  add_subdirectory(testing)
 #ELSE(CppUnit_FOUND)
 #	MESSAGE(STATUS "WARNING: CPP_UNIT not found")
 #ENDIF (CppUnit_FOUND)
@@ -96,7 +97,7 @@ SET(YOUBOT_DRIVER_SRC
 )
 
 add_library(YouBotDriver ${YOUBOT_DRIVER_SRC})
-target_link_libraries(YouBotDriver soem)
+target_link_libraries(YouBotDriver soem ${catkin_LIBRARIES})
 
 
 #install binary and lib
