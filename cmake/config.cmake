@@ -8,8 +8,3 @@
 
 set(youbot_driver_CONFIG_DIR ${youbot_driver_SOURCE_PREFIX}/config)
 
-message("lala geht")
-message("lala geht")
-message("lala geht")
-message(${youbot_driver_CONFIG_DIR})
-

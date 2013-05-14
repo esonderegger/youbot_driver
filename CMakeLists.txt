@@ -6,12 +6,13 @@ OPTION(USE_ROS "Enable ROS as compile tool" ON)
 ########### ROS ###########
 SET(ROS_ROOT_PATH $ENV{ROS_ROOT})
 IF(DEFINED ROS_ROOT_PATH AND USE_ROS MATCHES ON)
-	find_package(catkin REQUIRED)
+	find_package(catkin REQUIRED COMPONENTS rosconsole)
 	include_directories(${catkin_INCLUDE_DIRS})
 	link_directories(${catkin_LIBRARY_DIRS})
 	catkin_package(
 		INCLUDE_DIRS ${PROJECT_SOURCE_DIR} ${PROJECT_SOURCE_DIR}/soem/src
 		LIBRARIES YouBotDriver soem
+		CATKIN_DEPENDS rosconsole
 		CFG_EXTRAS config.cmake
 	)
 	ADD_DEFINITIONS(-DUSE_ROS_LOGGING)
