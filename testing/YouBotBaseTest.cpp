@@ -1,10 +1,14 @@
 #include "YouBotBaseTest.hpp"
+#include <stdlib.h>
+#include <stdexcept>
 
 using namespace youbot;
 
 YouBotBaseTest::YouBotBaseTest() {
-
-	EthercatMaster::getInstance("youbot-ethercat.cfg", "../config/", true);
+  char* location;
+  location = getenv("YOUBOT_CONFIG_FOLDER_LOCATION");
+  if(location == NULL) throw std::runtime_error("YouBotBaseTest.cpp: Could not find environment variable YOUBOT_CONFIG_FOLDER_LOCATION");
+  EthercatMaster::getInstance("youbot-ethercat.cfg", location, true);
 
 
 }

@@ -1,4 +1,6 @@
 #include "YouBotArmTestWithoutThread.hpp"
+#include <stdlib.h>
+#include <stdexcept>
 
 using namespace youbot;
 
@@ -13,13 +15,16 @@ YouBotArmTestWithoutThread::~YouBotArmTestWithoutThread() {
 }
 
 void YouBotArmTestWithoutThread::setUp() {
+  char* location = getenv("YOUBOT_CONFIG_FOLDER_LOCATION");
+  if(location == NULL) throw std::runtime_error("YouBotArmTestWithoutThread.cpp: Could not find environment variable YOUBOT_CONFIG_FOLDER_LOCATION");
+
   Logger::logginLevel = trace;
   updateCycle = 2000;
-  ethercatMaster = &EthercatMaster::getInstance("youbot-ethercat.cfg", "../config/", false);
+  ethercatMaster = &EthercatMaster::getInstance("youbot-ethercat.cfg", location, false);
 	if(ethercatMaster->isThreadActive()){
 		LOG(error) << "Thread Active";
 		EthercatMaster::destroy();
-		ethercatMaster = &EthercatMaster::getInstance("youbot-ethercat.cfg", "../config/", false);
+		ethercatMaster = &EthercatMaster::getInstance("youbot-ethercat.cfg", location, false);
 	}
 
 }

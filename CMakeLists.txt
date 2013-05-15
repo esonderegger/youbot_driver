@@ -6,22 +6,22 @@ OPTION(USE_ROS "Enable ROS as compile tool" ON)
 ########### ROS ###########
 SET(ROS_ROOT_PATH $ENV{ROS_ROOT})
 IF(DEFINED ROS_ROOT_PATH AND USE_ROS MATCHES ON)
-	find_package(catkin REQUIRED COMPONENTS rosconsole)
-	include_directories(${catkin_INCLUDE_DIRS})
-	link_directories(${catkin_LIBRARY_DIRS})
-	catkin_package(
-		INCLUDE_DIRS ${PROJECT_SOURCE_DIR} ${PROJECT_SOURCE_DIR}/soem/src
-		LIBRARIES YouBotDriver soem
-		CATKIN_DEPENDS rosconsole
-		CFG_EXTRAS config.cmake
-	)
-	ADD_DEFINITIONS(-DUSE_ROS_LOGGING)
+find_package(catkin REQUIRED COMPONENTS rosconsole)
+include_directories(${catkin_INCLUDE_DIRS})
+link_directories(${catkin_LIBRARY_DIRS})
+catkin_package(
+INCLUDE_DIRS ${PROJECT_SOURCE_DIR} ${PROJECT_SOURCE_DIR}/soem/src
+LIBRARIES YouBotDriver soem
+CATKIN_DEPENDS rosconsole
+CFG_EXTRAS config.cmake
+)
+ADD_DEFINITIONS(-DUSE_ROS_LOGGING)
         SET(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake-modules")
 ELSEIF(DEFINED ROS_ROOT_PATH AND USE_ROS MATCHES ON)
-	SET(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake-modules")
-	SET(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib) #static libraries
-	SET(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin) #executables
-	SET(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/lib) #dynamic libraries (plugins)
+SET(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake-modules")
+SET(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib) #static libraries
+SET(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin) #executables
+SET(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/lib) #dynamic libraries (plugins)
 ENDIF(DEFINED ROS_ROOT_PATH AND USE_ROS MATCHES ON)
 
 ########### cmake configuration and compiler flags ###########
@@ -60,10 +60,10 @@ INCLUDE_DIRECTORIES(
 ########### CppUnit and tests ###########
 #FIND_PACKAGE(CppUnit)
 #IF(CppUnit_FOUND)
-#	MESSAGE(STATUS "SUCCESSFUL: CPP_UNIT found")
+# MESSAGE(STATUS "SUCCESSFUL: CPP_UNIT found")
   add_subdirectory(testing)
 #ELSE(CppUnit_FOUND)
-#	MESSAGE(STATUS "WARNING: CPP_UNIT not found")
+# MESSAGE(STATUS "WARNING: CPP_UNIT not found")
 #ENDIF (CppUnit_FOUND)
 
 ########### youBot display example application ###########
@@ -117,6 +117,10 @@ install(DIRECTORY config
   DESTINATION ${CATKIN_PACKAGE_ETC_DESTINATION}
 )
 
+install(DIRECTORY config/
+  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
+)
+
 
 #ADD_LIBRARY(YouBotDriverShared SHARED "")
 #SET_TARGET_PROPERTIES(YouBotDriverShared PROPERTIES OUTPUT_NAME "YouBotDriver")
@@ -127,7 +131,7 @@ install(DIRECTORY config
 
 
 #ADD_EXECUTABLE(YouBot_test
-#  ${PROJECT_SOURCE_DIR}/Test_commutation.cpp
+# ${PROJECT_SOURCE_DIR}/Test_commutation.cpp
 #)
 
 #target_link_libraries(YouBot_test YouBotDriver)

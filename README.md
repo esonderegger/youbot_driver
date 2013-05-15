@@ -69,6 +69,9 @@ Now you should be able to compile the youBot API.
 
 The library will be generated in the folder ~/youbot_driver/lib.
 
+Include a line like this in your /.bashrc :
+
+export YOUBOT_CONFIG_FOLDER_LOCATION=~/<catkin workspace>/src/youbot_driver/config
 
 Usage
 ------------
@@ -114,6 +117,8 @@ To provide a program with raw access to a ethernet device use: (replace the ./Yo
 
 This have to be done whenever the executable is created or replaces e.g. after building.
 
+You have to manually call this on base_arm_gripper_test:
+	$ sudo setcap cap_net_raw+ep base_arm_gripper_test
 
 License
 ------------

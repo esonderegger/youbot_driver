@@ -1,10 +1,14 @@
 #include "YouBotBaseKinematicsTest.hpp"
+#include <stdlib.h>
+#include <stdexcept>
 
 using namespace youbot;
 
 YouBotBaseKinematicsTest::YouBotBaseKinematicsTest() {
+  char* location = getenv("YOUBOT_CONFIG_FOLDER_LOCATION");
+  if(location == NULL) throw std::runtime_error("YouBotBaseKinematicsTest.cpp: Could not find environment variable YOUBOT_CONFIG_FOLDER_LOCATION");
 
-  EthercatMaster::getInstance("youbot-ethercat.cfg", "../config/", true);
+  EthercatMaster::getInstance("youbot-ethercat.cfg", location, true);
 
 
 }

@@ -1,10 +1,13 @@
 #include "YouBotGripperTest.hpp"
+#include <stdlib.h>
+#include <stdexcept>
 
 using namespace youbot;
 
 YouBotGripperTest::YouBotGripperTest() : dof(5) {
-
-  EthercatMaster::getInstance("youbot-ethercat.cfg", "../config/", true);
+  char* location = getenv("YOUBOT_CONFIG_FOLDER_LOCATION");
+  if(location == NULL) throw std::runtime_error("YouBotGripperTest.cpp: Could not find environment variable YOUBOT_CONFIG_FOLDER_LOCATION");
+  EthercatMaster::getInstance("youbot-ethercat.cfg", location, true);
 
 }
 
