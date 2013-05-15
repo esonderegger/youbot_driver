@@ -10,15 +10,15 @@ find_package(catkin REQUIRED COMPONENTS rosconsole)
 include_directories(${catkin_INCLUDE_DIRS})
 link_directories(${catkin_LIBRARY_DIRS})
 catkin_package(
-INCLUDE_DIRS ${PROJECT_SOURCE_DIR} ${PROJECT_SOURCE_DIR}/soem/src
+INCLUDE_DIRS ${PROJECT_SOURCE_DIR}/include ${PROJECT_SOURCE_DIR}/include/soem
 LIBRARIES YouBotDriver soem
 CATKIN_DEPENDS rosconsole
 CFG_EXTRAS config.cmake
 )
 ADD_DEFINITIONS(-DUSE_ROS_LOGGING)
-        SET(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake-modules")
+        SET(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/src/cmake-modules")
 ELSEIF(DEFINED ROS_ROOT_PATH AND USE_ROS MATCHES ON)
-SET(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake-modules")
+SET(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/src/cmake-modules")
 SET(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib) #static libraries
 SET(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin) #executables
 SET(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/lib) #dynamic libraries (plugins)
@@ -50,18 +50,25 @@ ENDIF (Boost_FOUND)
 #include(UseDoxygen)
 
 ########### Simple Open EtherCAT Master Library ###########
-add_subdirectory(soem)
+add_subdirectory(src/soem)
 
 INCLUDE_DIRECTORIES(
- ${PROJECT_SOURCE_DIR}
- ${PROJECT_SOURCE_DIR}/soem/src
+ ${PROJECT_SOURCE_DIR}/include
+ ${PROJECT_SOURCE_DIR}/include/generic
+ ${PROJECT_SOURCE_DIR}/include/base-kinematic
+ ${PROJECT_SOURCE_DIR}/include/generic-joint
+ ${PROJECT_SOURCE_DIR}/include/testing
+ ${PROJECT_SOURCE_DIR}/include/one-dof-gripper
+ ${PROJECT_SOURCE_DIR}/include/youbot
+ ${PROJECT_SOURCE_DIR}/include/generic-gripper
+ ${PROJECT_SOURCE_DIR}/include/soem
 )
 
 ########### CppUnit and tests ###########
 #FIND_PACKAGE(CppUnit)
 #IF(CppUnit_FOUND)
 # MESSAGE(STATUS "SUCCESSFUL: CPP_UNIT found")
-  add_subdirectory(testing)
+  add_subdirectory(src/testing)
 #ELSE(CppUnit_FOUND)
 # MESSAGE(STATUS "WARNING: CPP_UNIT not found")
 #ENDIF (CppUnit_FOUND)
@@ -71,29 +78,29 @@ INCLUDE_DIRECTORIES(
 
 
 SET(YOUBOT_DRIVER_SRC
-  ${PROJECT_SOURCE_DIR}/youbot/EthercatMaster.cpp
-  ${PROJECT_SOURCE_DIR}/youbot/EthercatMasterWithThread.cpp
-  ${PROJECT_SOURCE_DIR}/youbot/EthercatMasterWithoutThread.cpp
-  ${PROJECT_SOURCE_DIR}/generic/Logger.cpp
-  ${PROJECT_SOURCE_DIR}/generic/ConfigFile.cpp
-  ${PROJECT_SOURCE_DIR}/generic/PidController.cpp
-  ${PROJECT_SOURCE_DIR}/generic-joint/JointData.cpp
-  ${PROJECT_SOURCE_DIR}/generic-joint/JointTrajectory.cpp
-  ${PROJECT_SOURCE_DIR}/youbot/YouBotJoint.cpp
-  ${PROJECT_SOURCE_DIR}/youbot/JointLimitMonitor.cpp
-  ${PROJECT_SOURCE_DIR}/youbot/YouBotBase.cpp
-  ${PROJECT_SOURCE_DIR}/youbot/YouBotManipulator.cpp
-  ${PROJECT_SOURCE_DIR}/youbot/YouBotGripper.cpp
-  ${PROJECT_SOURCE_DIR}/youbot/YouBotGripperBar.cpp
-  ${PROJECT_SOURCE_DIR}/youbot/YouBotGripperParameter.cpp
-  ${PROJECT_SOURCE_DIR}/youbot/DataTrace.cpp
-  ${PROJECT_SOURCE_DIR}/youbot/GripperDataTrace.cpp
-  ${PROJECT_SOURCE_DIR}/youbot/YouBotJointParameter.cpp
-  ${PROJECT_SOURCE_DIR}/youbot/YouBotJointParameterReadOnly.cpp
-  ${PROJECT_SOURCE_DIR}/youbot/YouBotJointParameterPasswordProtected.cpp
-  ${PROJECT_SOURCE_DIR}/youbot/JointTrajectoryController.cpp
-  ${PROJECT_SOURCE_DIR}/base-kinematic/FourSwedishWheelOmniBaseKinematic.cpp
-  ${PROJECT_SOURCE_DIR}/base-kinematic/FourSwedishWheelOmniBaseKinematicConfiguration.cpp
+  ${PROJECT_SOURCE_DIR}/src/youbot/EthercatMaster.cpp
+  ${PROJECT_SOURCE_DIR}/src/youbot/EthercatMasterWithThread.cpp
+  ${PROJECT_SOURCE_DIR}/src/youbot/EthercatMasterWithoutThread.cpp
+  ${PROJECT_SOURCE_DIR}/src/generic/Logger.cpp
+  ${PROJECT_SOURCE_DIR}/src/generic/ConfigFile.cpp
+  ${PROJECT_SOURCE_DIR}/src/generic/PidController.cpp
+  ${PROJECT_SOURCE_DIR}/src/generic-joint/JointData.cpp
+  ${PROJECT_SOURCE_DIR}/src/generic-joint/JointTrajectory.cpp
+  ${PROJECT_SOURCE_DIR}/src/youbot/YouBotJoint.cpp
+  ${PROJECT_SOURCE_DIR}/src/youbot/JointLimitMonitor.cpp
+  ${PROJECT_SOURCE_DIR}/src/youbot/YouBotBase.cpp
+  ${PROJECT_SOURCE_DIR}/src/youbot/YouBotManipulator.cpp
+  ${PROJECT_SOURCE_DIR}/src/youbot/YouBotGripper.cpp
+  ${PROJECT_SOURCE_DIR}/src/youbot/YouBotGripperBar.cpp
+  ${PROJECT_SOURCE_DIR}/src/youbot/YouBotGripperParameter.cpp
+  ${PROJECT_SOURCE_DIR}/src/youbot/DataTrace.cpp
+  ${PROJECT_SOURCE_DIR}/src/youbot/GripperDataTrace.cpp
+  ${PROJECT_SOURCE_DIR}/src/youbot/YouBotJointParameter.cpp
+  ${PROJECT_SOURCE_DIR}/src/youbot/YouBotJointParameterReadOnly.cpp
+  ${PROJECT_SOURCE_DIR}/src/youbot/YouBotJointParameterPasswordProtected.cpp
+  ${PROJECT_SOURCE_DIR}/src/youbot/JointTrajectoryController.cpp
+  ${PROJECT_SOURCE_DIR}/src/base-kinematic/FourSwedishWheelOmniBaseKinematic.cpp
+  ${PROJECT_SOURCE_DIR}/src/base-kinematic/FourSwedishWheelOmniBaseKinematicConfiguration.cpp
 )
 
 add_library(YouBotDriver ${YOUBOT_DRIVER_SRC})
@@ -107,7 +114,7 @@ install(TARGETS YouBotDriver
 )
 
 #copy header files
-install(DIRECTORY base-kinematic youbot generic generic-gripper generic-joint one-dof-gripper soem
+install(DIRECTORY include/base-kinematic include/youbot include/generic include/generic-gripper include/generic-joint include/one-dof-gripper include/soem
   DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
   FILES_MATCHING PATTERN "*.hpp" PATTERN "*.h"
 )
@@ -131,7 +138,7 @@ install(DIRECTORY config/
 
 
 #ADD_EXECUTABLE(YouBot_test
-# ${PROJECT_SOURCE_DIR}/Test_commutation.cpp
+# ${PROJECT_SOURCE_DIR}/src/Test_commutation.cpp
 #)
 
 #target_link_libraries(YouBot_test YouBotDriver)
