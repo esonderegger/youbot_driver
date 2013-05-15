@@ -1,5 +1,5 @@
-youBot API
-------------
+youbot_driver [![Build Status](https://api.travis-ci.org/WPI-RAIL/youbot_driver.png)](https://travis-ci.org/WPI-RAIL/youbot_driver)
+=============
 
 [API documentation](http://janpaulus.github.com)
 
