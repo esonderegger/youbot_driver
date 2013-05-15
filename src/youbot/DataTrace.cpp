@@ -379,7 +379,10 @@ void DataTrace::plotTrace() {
     std::string executeString = "cd ";
     executeString.append(path);
     executeString.append("; gnuplot ../../gnuplotconfig > /dev/null 2>&1");
-    std::system(executeString.c_str());
+    if(!std::system(executeString.c_str()))
+    {
+	//complain
+    }
   // Bouml preserved body end 000C9571
 }
 

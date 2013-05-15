@@ -209,7 +209,10 @@ void GripperDataTrace::plotTrace() {
     executeString.append(path);
     executeString.append("; gnuplot ../../GripperGnuPlotConfig");
     // > /dev/null 2>&1");
-    std::system(executeString.c_str());
+    if (!std::system(executeString.c_str()))
+    {
+      //complain
+    }
   // Bouml preserved body end 00101DF1
 }
 
