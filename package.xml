@@ -1,18 +1,20 @@
+<?xml version="1.0"?>
 <package>
   <name>youbot_driver</name>
-  <description>
-     Drivers for the KUKA youBot robot
-  </description>
-  <author>Jan Paulus/jan.paulus@h-brs.de</author>
-  <maintainer email="x@x.de">x</maintainer>
-  <license>gnu-lgpl-v2.1 modified-bsd</license>
   <version>0.1.0</version>
-  <url>https://github.com/youbot/youbot_driver</url>
+  <description>Drivers for the KUKA youBot Robot</description>
+
+  <maintainer email="rctoris@wpi.edu">Russell Toris</maintainer>
+  <author email="jan.paulus@h-brs.de">Jan Paulus</author>
+
+  <license>LGPL 2.1 or BSD</license>
+
+  <url type="website">http://ros.org/wiki/youbot_driver</url>
+  <url type="bugtracker">https://github.com/WPI-RAIL/youbot_driver/issues</url>
+  <url type="repository">https://github.com/WPI-RAIL/youbot_driver</url>
 
   <buildtool_depend>catkin</buildtool_depend>
   <build_depend>rosconsole</build_depend>
+
   <run_depend>rosconsole</run_depend>
-
 </package>
-
-
