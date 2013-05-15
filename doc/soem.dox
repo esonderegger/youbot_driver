@@ -1,5 +1,5 @@
 /**
- * \mainpage Simple Open EtherCAT Master or SOEM
+ * \page Simple Open EtherCAT Master or SOEM
  *
  * \section overview Overview
  * SOEM is an EtherCAT master library written in c. Its purpose is to learn and
