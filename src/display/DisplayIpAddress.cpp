@@ -95,7 +95,7 @@ bool setText(int fd, displayline line, std::string text) {
 
   int nobyteswrite = write(fd, send_bytes, size); //Send data
   if (nobyteswrite == 0)
-    std::cout << "Warning: write in setText wrote 0 bytes." std::endl;
+    std::cout << "Warning: write in setText wrote 0 bytes." << std::endl;
   printf("[");
   for (int i = 1; i < size - 1; i++) {
     printf("%c", send_bytes[i]);
@@ -112,7 +112,7 @@ double getVoltage(int fd, voltagesource source) {
 
   int nobyteswrite = write(fd, send_bytes, 1); //Send data
   if (nobyteswrite == 0)
-    std::cout << "Warning: write in getVoltage wrote 0 bytes." std::endl;
+    std::cout << "Warning: write in getVoltage wrote 0 bytes." << std::endl;
 
   const int readsize = 20; 
   char read_bytes[readsize] = {0};
