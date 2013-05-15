@@ -1,11 +1,20 @@
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 2.8.3)
 
-ADD_EXECUTABLE(displayIpAddress
-  ${PROJECT_SOURCE_DIR}/display/DisplayIpAddress.cpp
+###########
+## Build ##
+###########
 
-)
+## Declare a cpp executable
+add_executable(displayIpAddress DisplayIpAddress.cpp)
 
+## Specify libraries to link a library or executable target against
 target_link_libraries(displayIpAddress stdc++)
 
-INSTALL(TARGETS displayIpAddress RUNTIME DESTINATION bin LIBRARY DESTINATION lib ARCHIVE DESTINATION lib)
+#############
+## Install ##
+#############
 
+## Mark executables and/or libraries for installation
+install(TARGETS displayIpAddress
+  RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
