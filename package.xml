@@ -16,7 +16,9 @@
   <buildtool_depend>catkin</buildtool_depend>
   <build_depend>rosconsole</build_depend>
   <build_depend>roscpp</build_depend>
+  <build_depend>cppunit</build_depend>
 
   <run_depend>roscpp</run_depend>
   <run_depend>rosconsole</run_depend>
+  <run_depend>cppunit</run_depend>
 </package>
