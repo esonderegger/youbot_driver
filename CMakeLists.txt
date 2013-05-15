@@ -5,7 +5,7 @@ project(youbot_driver)
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 ########### ROS ###########
-find_package(catkin REQUIRED COMPONENTS rosconsole)
+find_package(catkin REQUIRED COMPONENTS rosconsole roscpp)
 find_package(Boost REQUIRED COMPONENTS thread date_time filesystem system regex)
 
 ###################################################
@@ -28,15 +28,15 @@ catkin_package(
 include_directories(
   ${catkin_INCLUDE_DIRS}
   ${Boost_INCLUDE_DIRS}
-  ${PROJECT_SOURCE_DIR}/include
-  ${PROJECT_SOURCE_DIR}/include/soem
-  ${PROJECT_SOURCE_DIR}/include/generic
-  ${PROJECT_SOURCE_DIR}/include/base-kinematic
-  ${PROJECT_SOURCE_DIR}/include/generic-joint
-  ${PROJECT_SOURCE_DIR}/include/testing
-  ${PROJECT_SOURCE_DIR}/include/one-dof-gripper
-  ${PROJECT_SOURCE_DIR}/include/youbot
-  ${PROJECT_SOURCE_DIR}/include/generic-gripper
+  include
+  include/soem
+  include/generic
+  include/base-kinematic
+  include/generic-joint
+  include/testing
+  include/one-dof-gripper
+  include/youbot
+  include/generic-gripper
 )
 
 link_directories(
@@ -51,29 +51,29 @@ add_subdirectory(src/soem)
 
 ## Main youBot Driver
 set(YOUBOT_DRIVER_SRC
-  ${PROJECT_SOURCE_DIR}/src/youbot/EthercatMaster.cpp
-  ${PROJECT_SOURCE_DIR}/src/youbot/EthercatMasterWithThread.cpp
-  ${PROJECT_SOURCE_DIR}/src/youbot/EthercatMasterWithoutThread.cpp
-  ${PROJECT_SOURCE_DIR}/src/generic/Logger.cpp
-  ${PROJECT_SOURCE_DIR}/src/generic/ConfigFile.cpp
-  ${PROJECT_SOURCE_DIR}/src/generic/PidController.cpp
-  ${PROJECT_SOURCE_DIR}/src/generic-joint/JointData.cpp
-  ${PROJECT_SOURCE_DIR}/src/generic-joint/JointTrajectory.cpp
-  ${PROJECT_SOURCE_DIR}/src/youbot/YouBotJoint.cpp
-  ${PROJECT_SOURCE_DIR}/src/youbot/JointLimitMonitor.cpp
-  ${PROJECT_SOURCE_DIR}/src/youbot/YouBotBase.cpp
-  ${PROJECT_SOURCE_DIR}/src/youbot/YouBotManipulator.cpp
-  ${PROJECT_SOURCE_DIR}/src/youbot/YouBotGripper.cpp
-  ${PROJECT_SOURCE_DIR}/src/youbot/YouBotGripperBar.cpp
-  ${PROJECT_SOURCE_DIR}/src/youbot/YouBotGripperParameter.cpp
-  ${PROJECT_SOURCE_DIR}/src/youbot/DataTrace.cpp
-  ${PROJECT_SOURCE_DIR}/src/youbot/GripperDataTrace.cpp
-  ${PROJECT_SOURCE_DIR}/src/youbot/YouBotJointParameter.cpp
-  ${PROJECT_SOURCE_DIR}/src/youbot/YouBotJointParameterReadOnly.cpp
-  ${PROJECT_SOURCE_DIR}/src/youbot/YouBotJointParameterPasswordProtected.cpp
-  ${PROJECT_SOURCE_DIR}/src/youbot/JointTrajectoryController.cpp
-  ${PROJECT_SOURCE_DIR}/src/base-kinematic/FourSwedishWheelOmniBaseKinematic.cpp
-  ${PROJECT_SOURCE_DIR}/src/base-kinematic/FourSwedishWheelOmniBaseKinematicConfiguration.cpp
+  src/youbot/EthercatMaster.cpp
+  src/youbot/EthercatMasterWithThread.cpp
+  src/youbot/EthercatMasterWithoutThread.cpp
+  src/generic/Logger.cpp
+  src/generic/ConfigFile.cpp
+  src/generic/PidController.cpp
+  src/generic-joint/JointData.cpp
+  src/generic-joint/JointTrajectory.cpp
+  src/youbot/YouBotJoint.cpp
+  src/youbot/JointLimitMonitor.cpp
+  src/youbot/YouBotBase.cpp
+  src/youbot/YouBotManipulator.cpp
+  src/youbot/YouBotGripper.cpp
+  src/youbot/YouBotGripperBar.cpp
+  src/youbot/YouBotGripperParameter.cpp
+  src/youbot/DataTrace.cpp
+  src/youbot/GripperDataTrace.cpp
+  src/youbot/YouBotJointParameter.cpp
+  src/youbot/YouBotJointParameterReadOnly.cpp
+  src/youbot/YouBotJointParameterPasswordProtected.cpp
+  src/youbot/JointTrajectoryController.cpp
+  src/base-kinematic/FourSwedishWheelOmniBaseKinematic.cpp
+  src/base-kinematic/FourSwedishWheelOmniBaseKinematicConfiguration.cpp
 )
 
 add_library(YouBotDriver ${YOUBOT_DRIVER_SRC})
