@@ -71,6 +71,13 @@ EthercatMasterInterface& EthercatMaster::getInstance(const std::string configFil
   // Bouml preserved body end 000E61F1
 }
 
+EthercatMasterInterface& EthercatMaster::getInstance()
+{
+  char* configLocation = getenv("YOUBOT_CONFIG_FOLDER_LOCATION");
+  if(configLocation == NULL) throw std::runtime_error("EthercatMaster.cpp::getInstance(): Could not find environment variable YOUBOT_CONFIG_FOLDER_LOCATION");
+  return EthercatMaster::getInstance("youbot-ethercat.cfg", configLocation);
+}
+
 /// destroy the singleton instance by calling the destructor
 void EthercatMaster::destroy()
 {
