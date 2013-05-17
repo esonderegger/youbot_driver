@@ -1,8 +1,7 @@
 DEVEL - **0.1.x**
 
-
 2013-05-17 - **0.1.3**
- * sudo added as dependency [(rctoris)](https://github.com/rctoris/)
+ * setcap now defaults to not run, will be added in post install of debian [(rctoris)](https://github.com/rctoris/)
 
 2013-05-17 - **0.1.2**
  * Forced proper "namespacing" on include files [(rctoris)](https://github.com/rctoris/)
