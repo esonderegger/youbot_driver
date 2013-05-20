@@ -14,6 +14,7 @@
   <url type="repository">https://github.com/WPI-RAIL/youbot_driver</url>
 
   <buildtool_depend>catkin</buildtool_depend>
+
   <build_depend>rosconsole</build_depend>
   <build_depend>roscpp</build_depend>
   <build_depend>cppunit</build_depend>
