@@ -96,6 +96,8 @@ public:
   static EthercatMasterInterface& getInstance(const std::string configFile, const std::string configFilePath,
                                               const bool ethercatMasterWithThread = true);
 
+  static EthercatMasterInterface& getInstance();
+
   /// destroy the singleton instance by calling the destructor
   static void destroy();
 
