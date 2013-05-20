@@ -4,7 +4,6 @@ project(youbot_driver)
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
-########### ROS ###########
 find_package(catkin REQUIRED COMPONENTS rosconsole roscpp)
 find_package(Boost REQUIRED COMPONENTS thread date_time filesystem system regex)
 
