@@ -17,9 +17,9 @@
   <build_depend>rosconsole</build_depend>
   <build_depend>roscpp</build_depend>
   <build_depend>cppunit</build_depend>
-  <build_depend>libcap2-bin</build_depend>
 
   <run_depend>roscpp</run_depend>
   <run_depend>rosconsole</run_depend>
   <run_depend>cppunit</run_depend>
+  <run_depend>libcap2-bin</run_depend>
 </package>
