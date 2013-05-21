@@ -84,6 +84,7 @@ add_subdirectory(src/display)
 
 ## Mark executables and/or libraries for installation
 install(TARGETS YouBotDriver
+  ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
 )
 
