@@ -7,9 +7,6 @@ cmake_minimum_required(VERSION 2.8.3)
 ## Declare a cpp executable
 add_executable(displayIpAddress DisplayIpAddress.cpp)
 
-## Specify libraries to link a library or executable target against
-target_link_libraries(displayIpAddress stdc++)
-
 #############
 ## Install ##
 #############
@@ -17,9 +14,4 @@ target_link_libraries(displayIpAddress stdc++)
 ## Mark executables and/or libraries for installation
 install(TARGETS displayIpAddress
   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
-)
-
-## Set permissions
-add_custom_command(TARGET displayIpAddress POST_BUILD
-    COMMAND sudo setcap cap_net_raw+ep $<TARGET_FILE:displayIpAddress>
 )

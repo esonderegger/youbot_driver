@@ -48,8 +48,8 @@
  * License LGPL and BSD license along with this program.
  *
  ****************************************************************/
-#include "generic-joint/JointTrajectory.hpp"
-namespace youbot {
-
+#include <youbot_driver/generic-joint/JointTrajectory.hpp>
+namespace youbot
+{
 
 } // namespace youbot
