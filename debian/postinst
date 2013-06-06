@@ -10,17 +10,6 @@ ldconfig
 
 echo "Setting up udev rule for hokuyo..."
 
-if grep -q usb /etc/group
-then
-  echo '  usb group already exists'
-else
-  echo '  making the usb group'
-  groupadd usb
-fi
-
-echo '  adding the current user (' ${SUDO_USER:-$USER} ') to the usb group'
-usermod -aG usb ${SUDO_USER:-$USER}
-
 echo '  copying the udev rule for the hokuyo to /etc/udev/rules.d/'
 cp -f /opt/ros/groovy/share/youbot_driver/udev_rules/47-hokuyo.rules /etc/udev/rules.d/47-hokuyo.rules
 
