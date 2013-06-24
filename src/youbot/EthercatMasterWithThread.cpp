@@ -682,6 +682,7 @@ void EthercatMasterWithThread::updateSensorActorValues()
       communicationErrors = 0;
     }
 
+//after receiving too many consecutive communication errors, give up
     if (communicationErrors > maxCommunicationErrors)
     {
       LOG(error) << "Lost EtherCAT connection";

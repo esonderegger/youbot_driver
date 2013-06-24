@@ -924,4 +924,9 @@ void YouBotManipulator::initializeJoints()
   // Bouml preserved body end 00068071
 }
 
+
+bool YouBotManipulator::isEtherCATConnectionEstablished() {
+  return (ethercatMasterWithThread!=NULL && ethercatMasterWithThread->isEtherCATConnectionEstablished());
+}
+
 } // namespace youbot
