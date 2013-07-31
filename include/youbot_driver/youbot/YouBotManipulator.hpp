@@ -136,6 +136,9 @@ public:
   ///@param data returns the actual joint torque by reference
   virtual void getJointData(std::vector<JointSensedTorque>& data);
 
+  //whether the EtherCat connection is currently established
+  bool isEtherCATConnectionEstablished();
+
 private:
   YouBotManipulator(const YouBotManipulator & source);
 
